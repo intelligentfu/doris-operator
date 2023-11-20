@@ -9,7 +9,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: smiletan/doris-operator
       - name: env 
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
@@ -33,5 +37,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: |
-            smiletan/doris-operator:latest
+          tags: ${{ steps.meta.outputs.tags }}
