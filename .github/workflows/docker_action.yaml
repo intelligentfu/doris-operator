@@ -1,8 +1,7 @@
 name: docker
 on:
   push:
-    branches:
-      - "workflow_docker"
+    tags: "*.*.*"
 jobs:
   docker:
     runs-on: ubuntu-latest
