@@ -30,6 +30,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: 
-            - smiletan/doris-operator:$Version
-            - smiletan/doris-operator:latest
+          tags: |
+            smiletan/doris-operator:$Version
+            smiletan/doris-operator:latest
