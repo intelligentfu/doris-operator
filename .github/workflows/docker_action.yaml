@@ -7,7 +7,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: set output 
+      - name: env 
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
 
@@ -31,5 +31,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            smiletan/doris-operator:$Version
             smiletan/doris-operator:latest
