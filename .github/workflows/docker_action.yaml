@@ -8,11 +8,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Docker meta
+      - name: Operator meta
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: smiletan/doris-operator
+
+      - name: Doris Debug meta
+        id: debug_meta
+        uses: docker/metadata-action@v5
+        with:
+          images: smiletan/doris-debug
+
       - name: env 
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
@@ -28,7 +35,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build and push Operator
         uses: docker/build-push-action@v5
         env:
           Version: ${{ steps.vars.outputs.tag }}
@@ -37,3 +44,14 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+
+      - name: Build and push Doris-Debug
+        uses: docker/build-push-action@v5
+        env:
+          Version: ${{ steps.vars.outputs.tag }}
+        with:
+          context: .
+          file: ./Dockerfile_doris_debug
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.debug_meta.outputs.tags }}
