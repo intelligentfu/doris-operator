@@ -25,12 +25,12 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
-          charts_dir: helm-charts/doris-operator
+          charts_dir: helm-charts
           skip_upload: true
-      - name: doris package
-        uses: helm/chart-releaser-action@v1.6.0
-        env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        with:
-          charts_dir: helm-charts/doris
-          skip_upload: true
+            #      - name: doris package
+            #        uses: helm/chart-releaser-action@v1.6.0
+            #        env:
+            #          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+            #        with:
+            #          charts_dir: helm-charts/doris
+            #          skip_upload: true
