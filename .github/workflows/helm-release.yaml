@@ -19,13 +19,18 @@ jobs:
           fetch-depth: 0
       - name: Install Helm
         uses: azure/setup-helm@v3
+
       - name: doris-operator package
         uses: helm/chart-releaser-action@v1.6.0
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
           charts_dir: helm-charts/doris-operator
           skip_upload: true
       - name: doris package
         uses: helm/chart-releaser-action@v1.6.0
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
           charts_dir: helm-charts/doris
           skip_upload: true
