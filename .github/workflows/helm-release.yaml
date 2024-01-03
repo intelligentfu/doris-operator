@@ -18,7 +18,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Install Helm
-        uses: azure/setup-help@v3
+        uses: azure/setup-helm@v3
       - name: doris-operator package
         uses: helm/chart-releaser-action@v1.6.0
         with:
